@@ -1,0 +1,13 @@
+QMessageBox {
+    background-color: #2D2D2D;
+    border: 1px solid #3C3C3C;
+    color: #DCDCDC;
+    font: 12pt "Calibri";
+    padding: 4px;
+    border-radius: 4px;
+}
+
+QPushButton {
+    min-width: 120px;
+    padding: 8px;
+    }

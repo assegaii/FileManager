@@ -1,0 +1,858 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>811</width>
+    <height>458</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>File Manager</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resourses.qrc">
+    <normaloff>:/image/folder.ico</normaloff>:/image/folder.ico</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: white;</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0">
+    <property name="spacing">
+     <number>6</number>
+    </property>
+    <property name="leftMargin">
+     <number>9</number>
+    </property>
+    <property name="topMargin">
+     <number>9</number>
+    </property>
+    <property name="rightMargin">
+     <number>9</number>
+    </property>
+    <property name="bottomMargin">
+     <number>9</number>
+    </property>
+    <item>
+     <layout class="QHBoxLayout" name="topControlsLayout">
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <item>
+       <widget class="QPushButton" name="backButton">
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+border-radius: 10px;
+background-color: white; 
+background-image: url(://image/back.png);
+background-repeat: no-repeat;
+background-position: center;
+transition: all 0.3s ease-in;
+}
+QPushButton:hover {
+background-color: #f0f0f0;
+}
+QPushButton:pressed {
+    background-color: #d0d0d0; 
+}</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="forwardButton">
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+border-radius: 10px;
+background-color: white; 
+background-image: url(://image/forward.png);
+background-repeat: no-repeat;
+background-position: center;
+transition: all 0.3s ease-in;
+}
+QPushButton:hover {
+background-color: #f0f0f0;
+}
+QPushButton:pressed {
+    background-color: #d0d0d0; 
+}</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="updateButton">
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+border-radius: 10px;
+background-color: white; 
+background-image: url(://image/rotate.png);
+background-repeat: no-repeat;
+background-position: center;
+transition: all 0.3s ease-in;
+}
+QPushButton:hover {
+background-color: #f0f0f0;
+}
+QPushButton:pressed {
+    background-color: #d0d0d0; 
+}</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="pathEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>38</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Calibri</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {
+    padding-right: 5px; 
+	padding-left: 5px;
+	border: 3px solid transparent;
+
+	border-radius: 10px;
+	background-color: #CECECE; 
+	color: black;
+
+	transition: all 0.3s ease-in;
+}
+QLineEdit:focus {
+    border-color: #84CAE7;
+    box-shadow: 0px 4px 10px #rgba(132, 202, 231, 200); 
+}</string>
+        </property>
+        <property name="placeholderText">
+         <string>Путь &gt; до &gt; файла</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="searchEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>200</width>
+          <height>38</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Calibri</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {
+    padding-right: 20px; 
+	padding-left: 5px;
+    background-image: url(://image/search.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+	border: 3px solid transparent;
+
+	border-radius: 10px;
+	background-color: #CECECE; 
+	color: black;
+
+	transition: all 0.3s ease-in;
+}
+QLineEdit:focus {
+    border-color: #84CAE7;
+    box-shadow: 0px 4px 10px #rgba(132, 202, 231, 200); 
+}</string>
+        </property>
+        <property name="placeholderText">
+         <string>Поиск...</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="toolbarLayout">
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <item>
+       <widget class="QPushButton" name="createButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>127</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Calibri</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+border-radius: 10px;
+padding-left: 12px;
+background-color: #CECECE; 
+color: black;
+background-image: url(://image/add.png);
+background-repeat: no-repeat;
+background-position: left;
+border-left: 10px solid #CECECE;
+transition: all 0.3s ease-in;
+}
+QPushButton:hover {
+background-color: #dedede;
+border-color: #dedede;
+}
+QPushButton:pressed {
+    background-color: #d0d0d0; 
+border-color: #d0d0d0;
+}</string>
+        </property>
+        <property name="text">
+         <string>Создать</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Policy::Maximum</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>48</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="cutButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+border-radius: 10px;
+background-color: #CECECE; 
+background-image: url(://image/cut.png);
+background-repeat: no-repeat;
+background-position: center;
+transition: all 0.3s ease-in;
+}
+QPushButton:hover {
+background-color: #dedede;
+}
+QPushButton:pressed {
+    background-color: #d0d0d0; 
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Policy::Maximum</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>9</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="copyButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+border-radius: 10px;
+background-color: #CECECE; 
+background-image: url(://image/copy.png);
+background-repeat: no-repeat;
+background-position: center;
+transition: all 0.3s ease-in;
+}
+QPushButton:hover {
+background-color: #dedede;
+}
+QPushButton:pressed {
+    background-color: #d0d0d0; 
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_5">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Policy::Maximum</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>9</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pasteButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+border-radius: 10px;
+background-color: #CECECE; 
+background-image: url(://image/paste.png);
+background-repeat: no-repeat;
+background-position: center;
+transition: all 0.3s ease-in;
+}
+QPushButton:hover {
+background-color: #dedede;
+}
+QPushButton:pressed {
+    background-color: #d0d0d0; 
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_6">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Policy::Maximum</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>9</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="deleteButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+border-radius: 10px;
+background-color: #CECECE; 
+background-image: url(://image/delete.png);
+background-repeat: no-repeat;
+background-position: center;
+transition: all 0.3s ease-in;
+}
+QPushButton:hover {
+background-color: #dedede;
+}
+QPushButton:pressed {
+    background-color: #d0d0d0; 
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_7">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Policy::Maximum</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>9</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="renameButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+border-radius: 10px;
+background-color: #CECECE; 
+background-image: url(://image/rename.png);
+background-repeat: no-repeat;
+background-position: center;
+transition: all 0.3s ease-in;
+}
+QPushButton:hover {
+background-color: #dedede;
+}
+QPushButton:pressed {
+    background-color: #d0d0d0; 
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_8">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Policy::Maximum</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>48</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="sortButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>154</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Calibri</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+border-radius: 10px;
+padding-left: 12px;
+background-color: #CECECE; 
+color: black;
+background-image: url(://image/sort.png);
+background-repeat: no-repeat;
+background-position: left;
+border-left: 10px solid #CECECE;
+transition: all 0.3s ease-in;
+}
+QPushButton:hover {
+background-color: #dedede;
+border-color: #dedede;
+}
+QPushButton:pressed {
+    background-color: #d0d0d0; 
+border-color: #d0d0d0;
+}</string>
+        </property>
+        <property name="text">
+         <string>Сортировать</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <family>Calibri</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: black;</string>
+        </property>
+        <property name="text">
+         <string>Фильтры:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Policy::Maximum</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>9</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>300</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Calibri</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {
+    padding-right: 5px; 
+	padding-left: 5px;
+	border: 3px solid transparent;
+
+	border-radius: 10px;
+	background-color: #CECECE; 
+	color: black;
+
+	transition: all 0.3s ease-in;
+}
+QLineEdit:focus {
+    border-color: #84CAE7;
+    box-shadow: 0px 4px 10px #rgba(132, 202, 231, 200); 
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="placeholderText">
+         <string>Например: *.pdf, *.doc </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <spacer name="verticalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Orientation::Vertical</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Policy::Maximum</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>12</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QSplitter" name="splitter">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>1</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Orientation::Horizontal</enum>
+      </property>
+      <widget class="QTreeView" name="treeView">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>1</horstretch>
+         <verstretch>1</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>200</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Calibri</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">
+QTreeView{
+	background-color:#CECECE;
+}
+QTreeView::item {
+	color: black;    
+	padding: 4px;
+    border: 1px solid transparent;
+    background: transparent;
+}
+
+QTreeView::item:hover {
+    background: #ebebeb;
+    border-radius: 4px;
+}
+
+QTreeView::item:selected {
+    background: #ebebeb;
+	selection-background-color: transparent;
+    selection-color: inherit;
+    show-decoration-selected: 0;
+}</string>
+       </property>
+      </widget>
+      <widget class="QListView" name="listView">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>3</horstretch>
+         <verstretch>1</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>200</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Calibri</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">/* Стиль для редактора переименования */
+QListView QLineEdit {
+    color: #000000 !important;       /* Черный цвет текста */
+    background: #FFFFFF !important;  /* Белый фон */
+    border: 2px solid #84CAE7;       /* Цвет как у выделения */
+    border-radius: 4px;
+    padding: 3px 6px;
+    font: 12pt &quot;Arial&quot;;
+}
+QListView::item {
+    color: black;
+	padding: 4px;
+    border: 1px solid transparent;
+    background: transparent;
+	outline: none;
+}
+
+QListView::item:hover {
+    background: #e3f2fd;
+    border-radius: 4px;
+}
+
+QListView::item:selected {
+    border: 2px solid #84CAE7;
+    background: #e3f2fd;
+    border-radius: 4px;
+	selection-background-color: transparent;
+    selection-color: inherit;
+    show-decoration-selected: 0;
+}
+
+QMenu {
+    background-color: #2D2D2D;
+    border: 1px solid #3C3C3C;
+    color: #DCDCDC;
+    font: 12pt &quot;Arial&quot;;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+QMenu::item {
+    padding: 6px 24px;
+    min-width: 120px;
+}
+
+QMenu::item:selected {
+    background-color: #3E6DA9;
+    color: white;
+    border-radius: 3px;
+}
+
+QMenu::icon {
+    padding-left: 8px;
+}
+
+QMenu::separator {
+    height: 1px;
+    background: #404040;
+    margin: 4px 8px;
+}</string>
+       </property>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources>
+  <include location="resourses.qrc"/>
+ </resources>
+ <connections/>
+</ui>

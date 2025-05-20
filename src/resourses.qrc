@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/">
+        <file>image/back.png</file>
+        <file>image/forward.png</file>
+        <file>image/rotate.png</file>
+        <file>image/add.png</file>
+        <file>image/copy.png</file>
+        <file>image/cut.png</file>
+        <file>image/delete.png</file>
+        <file>image/paste.png</file>
+        <file>image/rename.png</file>
+        <file>image/search.png</file>
+        <file>image/sort.png</file>
+        <file>image/folder.ico</file>
+        <file>context_menu.qss</file>
+        <file>paste_menu.qss</file>
+    </qresource>
+</RCC>

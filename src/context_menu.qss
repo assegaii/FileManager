@@ -1,0 +1,29 @@
+QMenu {
+    background-color: #2D2D2D;
+    border: 1px solid #3C3C3C;
+    color: #DCDCDC;
+    font: 12pt "Calibri";
+    padding: 4px;
+    border-radius: 4px;
+}
+
+QMenu::item {
+    padding: 6px 24px;
+    min-width: 120px;
+}
+
+QMenu::item:selected {
+    background-color: #84CAE7;
+    color: black;
+    border-radius: 3px;
+}
+
+QMenu::icon {
+    padding-left: 8px;
+}
+
+QMenu::separator {
+    height: 1px;
+    background: #404040;
+    margin: 4px 8px;
+}
