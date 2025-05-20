@@ -12,6 +12,28 @@
 #include <QClipboard>
 #include <QRegularExpression>
 
+void MainWindow::setupHotkeys() {
+    // Удаление (Del)
+    QShortcut* deleteShortcut = new QShortcut(QKeySequence::Delete, this);
+    connect(deleteShortcut, &QShortcut::activated, this, &MainWindow::onDelete);
+
+    // Вырезать (Ctrl+X)
+    QShortcut* cutShortcut = new QShortcut(QKeySequence::Cut, this);
+    connect(cutShortcut, &QShortcut::activated, this, &MainWindow::onCut);
+
+    // Копировать (Ctrl+C)
+    QShortcut* copyShortcut = new QShortcut(QKeySequence::Copy, this);
+    connect(copyShortcut, &QShortcut::activated, this, &MainWindow::onCopy);
+
+    // Вставить (Ctrl+V)
+    QShortcut* pasteShortcut = new QShortcut(QKeySequence::Paste, this);
+    connect(pasteShortcut, &QShortcut::activated, this, &MainWindow::onPaste);
+
+    // Переименовать (F2)
+    QShortcut* renameShortcut = new QShortcut(Qt::Key_F2, this);
+    connect(renameShortcut, &QShortcut::activated, this, &MainWindow::onRename);
+}
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -56,6 +78,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->treeView->setIconSize(QSize(32, 32));
     ui->listView->setIconSize(QSize(48, 48));
     ui->treeView->setSortingEnabled(true);
+    ui->listView->setEditTriggers(QAbstractItemView::EditKeyPressed);
 
     // NEW: Настройка контекстного меню
     ui->listView->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -87,6 +110,8 @@ MainWindow::MainWindow(QWidget *parent)
     //UPD: не схлопывать сплиттер
     ui->splitter->setCollapsible(0, false);
     ui->splitter->setCollapsible(1, false);
+
+    setupHotkeys();
 }
 
 MainWindow::~MainWindow()
@@ -249,6 +274,7 @@ void MainWindow::onRename()
     QModelIndex sourceIndex = proxyModel->mapToSource(proxyIndex);
     QFileInfo oldInfo = fileModel->fileInfo(sourceIndex);
 
+    fileModel->fetchMore(sourceIndex.parent());
     // Запускаем стандартное редактирование имени
     ui->listView->edit(proxyIndex);
 
@@ -261,18 +287,18 @@ void MainWindow::onRename()
         QString newName = editor->text().trimmed();
         QString newPath = QDir(oldInfo.path()).filePath(newName);
 
-        // Обновляем информацию о файле
-        QFileInfo newFileInfo(newPath);
-        newFileInfo.refresh();
-
-        // Если имя не изменилось
-        if (newName == oldInfo.fileName()) {
-            refreshView();
-            return;
+        // Проверяем существование через модель
+        bool exists = false;
+        QModelIndex parentIndex = fileModel->index(oldInfo.path());
+        for (int i = 0; i < fileModel->rowCount(parentIndex); ++i) {
+            QModelIndex child = fileModel->index(i, 0, parentIndex);
+            if (fileModel->fileName(child) == newName && child != sourceIndex) {
+                exists = true;
+                break;
+            }
         }
 
-        // Если файл с новым именем уже существует
-        if (newFileInfo.exists()) {
+        if (exists) {
             QMessageBox msgBox;
             msgBox.setWindowTitle(tr("Конфликт имён"));
             msgBox.setText(
@@ -318,13 +344,22 @@ QString MainWindow::generateUniqueName(const QString &path, const QString &name)
     QFileInfo fi(name);
     QString base = fi.baseName();
     QString ext = fi.suffix().isEmpty() ? "" : "." + fi.suffix();
-
     int counter = 1;
     QString newName;
 
+    // Получаем список существующих имен через модель
+    QModelIndex parentIndex = fileModel->index(path);
+    int rowCount = fileModel->rowCount(parentIndex);
+    QSet<QString> existingNames;
+
+    for (int i = 0; i < rowCount; ++i) {
+        QModelIndex childIndex = fileModel->index(i, 0, parentIndex);
+        existingNames.insert(fileModel->fileName(childIndex));
+    }
+
     do {
         newName = QString("%1 (%2)%3").arg(base).arg(counter++).arg(ext);
-    } while (QFile::exists(QDir(path).filePath(newName)));
+    } while (existingNames.contains(newName));
 
     return newName;
 }
@@ -643,11 +678,7 @@ void MainWindow::createNewFile(const QString &prefix, const QString &extension)
         file.close();
         refreshView();
 
-        // Активируем редактирование имени
-        QModelIndex index = fileModel->index(fullPath);
-        if(index.isValid()) {
-            ui->listView->edit(proxyModel->mapFromSource(index));
-        }
+
     } else {
         QMessageBox::critical(this, "Ошибка",
                               QString("Не удалось создать файл:\n%1").arg(file.errorString()));

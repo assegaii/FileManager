@@ -6,7 +6,12 @@ FileFilterProxyModel::FileFilterProxyModel(QObject *parent)
 
 void FileFilterProxyModel::setCurrentPath(const QString &path) {
     m_currentPath = path;
-    m_fsModel = qobject_cast<QFileSystemModel*>(sourceModel());
+    m_fsModel = dynamic_cast<QFileSystemModel*>(sourceModel());
+    if (!m_fsModel) {
+        qWarning() << "Error";
+        return;
+    }
+
     invalidateFilter();
 }
 
@@ -40,4 +45,11 @@ bool FileFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &so
         );
 
     return regex.match(fileInfo.fileName()).hasMatch();
+}
+Qt::ItemFlags FileFilterProxyModel::flags(const QModelIndex &index) const {
+    if (!index.isValid())
+        return Qt::NoItemFlags;
+
+    // Передаём флаги из исходной модели
+    return QSortFilterProxyModel::flags(index) | Qt::ItemIsEditable;
 }

@@ -12,6 +12,8 @@ public:
     void setCurrentPath(const QString &path);
     void setFilterString(const QString &filter);
 
+    Qt::ItemFlags flags(const QModelIndex &index) const override;
+
 protected:
     bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const override;
 

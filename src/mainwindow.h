@@ -13,6 +13,8 @@
 #include <QStack>
 #include <QActionGroup>
 
+#include <QShortcut>
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -94,6 +96,8 @@ private:
     void refreshView();
     void setupNewTab(int index, const QString& path);
     bool copyDirectory(const QString &src, const QString &dest);
+
+    void setupHotkeys();
 
 friend class TestMainWindow;
 
